@@ -35,17 +35,16 @@
 				
 				
 				// paste your code from the geometryGUI here
-             map = THREE.ImageUtils.loadTexture('../texturez/crate.jpg');
-geometry = new THREE.CubeGeometry(200, 200, 200);
-material = new THREE.MeshPhongMaterial({shading: THREE.FlatShading, color: 0xdcdcdc, ambient: 0xac6060, emissive: 0x000000, specular: 0x912222, shininess: -0.41, map: map, side: THREE.DoubleSide});
+ 
+
+geometry = new THREE.SphereGeometry(180.02, 14.15, 127.12);
+material = new THREE.MeshNormalMaterial({shading: THREE.FlatShading});
 mesh = new THREE.Mesh(geometry, material);
-map.wrapS = map.wrapT = THREE.RepeatWrapping;
-map.repeat.set( 1, 1 );
+mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.81;
+mesh.rotation.x = 1.85;
+mesh.rotation.y = 2.82;
 scene.add(mesh);
-
-
-
-			}
+            }
 
 			function draw() {
 
