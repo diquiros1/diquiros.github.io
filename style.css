@@ -1,0 +1,229 @@
+body{
+  padding:;
+  margin:0;
+    font-family: Roboto, sans-serif;
+  height: 200px;
+ background-image: linear-gradient(to right, #4D8B56, #B4CDB7,#4D8B56);
+}
+
+/* Global */
+.container{
+  width:95%;
+position:relative; left:39px;
+  margin:10;
+     margin-left: 1px;
+  text-align:center;
+  overflow:hidden;
+  font-size: 85%;
+ 
+}
+
+body {
+  
+
+
+  font-family: 'Press Start 2P';
+  line-height: 1.5;
+  padding: 30px 20px;
+}
+
+.Homepage{
+  width:97%;
+position:relative; left:12px;
+  margin:10;
+  text-align:center;
+  overflow:hidden;
+}
+
+.current{
+    color: #FFFFFF  
+}
+
+
+/* Header **/
+header{
+  color:#000000;
+  padding-top:50px;
+  min-height:100px;
+  border-bottom:#FEFEFE 7px solid;
+     font-size:25px;
+}
+
+header a{
+  color:#000000;
+  text-decoration:none;
+  text-transform: uppercase;
+  font-size:25px;
+}
+
+header li{
+  float:left;
+  display:inline;
+  padding: 17px 1px 10px 20px;
+}
+
+header #branding{
+  float:left;
+}
+
+header #branding h1{
+  margin:auto;
+}
+
+header nav{
+  float:right;
+}
+
+header .highlight, header .current a{
+  color:#FFFFFF;
+  font-weight:bold;
+}
+
+header a:hover{
+  color:#FEFEFE;
+  font-weight:bold;
+}
+
+/* Showcase */
+#showcase{
+  background:url("https://archive-media-0.nyafuu.org/wg/image/1472/33/1472332510394.gif");
+    object-fit:cover;
+     position:relative; left:px;
+    object-position: -20% 0;
+    width: 300px
+  text-align:center;
+
+}
+
+/* Showcase */
+#blocks{
+  background:url("https://media.npr.org/assets/img/2013/06/19/istock_000015887619small-421db7ada5b3aa1ca39dd5247f4837e0aa3ddeea-s800-c85.jpg");
+    object-fit:cover;
+     position:relative; left:px;
+    object-position: -200% 0;
+    width: 300px
+  text-align:center;
+
+}
+
+#lab{
+  background:url("https://media.istockphoto.com/videos/beautiful-abstract-square-tunnel-with-blue-light-lines-moving-fast-video-id940497140?s=640x640");
+    object-fit:cover;
+     position:relative; left:px;
+    object-position: -200% 0;
+    width: 300px
+  text-align:center;
+
+}");
+    object-fit:cover;
+     position:relative; left:px;
+    object-position: -200% 0;
+    width: 300px
+  text-align:center;
+
+}
+
+#showcase p{
+  font-size:50px;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 0.4px;
+  -webkit-text-stroke-color: white;
+    text-align:center;
+}
+
+* {box-sizing:border-box}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+}
