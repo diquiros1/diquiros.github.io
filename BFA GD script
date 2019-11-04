@@ -1,0 +1,160 @@
+#Enemy
+
+extends KinematicBody2D
+
+const GRAVITY = 10
+export(int) var speed = 30
+const FLOOR = Vector2(0, -1)
+
+var _velocity = Vector2()
+var velocity = Vector2()
+
+var direction = 1
+
+var is_dead = false
+
+export(int) var hp = 1
+
+export var stomp_impulse: = 1000.0
+
+export(Vector2) var size = Vector2(1,1)
+
+func _ready():
+	scale = size
+	
+func _on_StompDetector_body_entered(body):
+	if body.global_position.y > get_node("StompDetector").global_position.y:
+		return
+	get_node("CollisionShape2D")
+	queue_free()
+	
+#func _on_StompDetector_area_entered(area):
+	#_velocity = calculate_stomp_velocity(_velocity, stomp_impulse)
+
+func _dead():
+	hp = hp -1
+	if hp <= 0:
+		is_dead = true
+		velocity = Vector2(0, 0)
+		$AnimatedSprite.play("dead")
+		$CollisionShape2D.disabled = true
+		$Timer.start()
+		if scale > Vector2(1, 1):
+			get_parent().get_node("ScreenShake").screen_shake(1, 10, 100)
+			
+
+func _physics_process(delta):
+	if is_dead ==false:
+		velocity.x = speed * direction
+		
+		if direction == 1:
+			$AnimatedSprite.flip_h = false
+		else:
+			$AnimatedSprite.flip_h = true
+			
+		$AnimatedSprite.play("walk")
+	
+	velocity.y += GRAVITY
+	
+	velocity = move_and_slide(_velocity, FLOOR)
+	
+	
+	if is_on_wall():
+		direction = direction * -1
+		$RayCast2D.position.x *= -1
+		
+	if $RayCast2D.is_colliding() == false:
+		direction = direction * -1
+		$RayCast2D.position.x *= -1
+		
+	if get_slide_count() > 0:
+		for i in range (get_slide_count()):
+			if ("Femaleplayer") in get_slide_collision(i).collider.name:
+						get_slide_collision(i).collider.dead()
+		
+
+func _on_Timer_timeout():
+	queue_free()
+
+
+#Player
+
+extends KinematicBody2D
+
+const MAX_SPEED = 300
+const GRAVITY = 17
+const JUMP_HEIGHT = -600
+const ACCELERATION = 70
+const UP = Vector2(0, -1)
+
+var is_dead = false
+var _velocity = Vector2()
+var motion = Vector2()
+const ui_right = 200
+
+export var stomp_impulse: = 1000.0
+
+func _on_EnemyDetector_area_entered(area: Area2D) -> void:
+	_velocity = calculate_stomp_velocity(_velocity, stomp_impulse)
+	
+func _on_EnemyDetector_body_entered(body):
+	queue_free()
+
+func _ready():
+	set_process(true)
+
+func _physics_process(delta):
+	
+	if is_dead == false:
+		motion.y += GRAVITY
+		var friction = false
+		
+		if Input.is_action_pressed("ui_right"):
+			motion.x = min(motion.x+ACCELERATION, MAX_SPEED)
+			$Sprite.flip_h = false
+			$Sprite.play("Run")
+			
+		elif Input.is_action_pressed("ui_left"):
+			motion.x = max(motion.x-ACCELERATION, -MAX_SPEED)
+			$Sprite.flip_h = true
+			$Sprite.play("Run")
+			
+		else:
+			$Sprite.play("Idle")
+			friction = true
+			
+		if  is_on_floor():
+			if Input.is_action_just_pressed("ui_up"):
+				motion.y = JUMP_HEIGHT
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.2)
+		else:
+			if motion.y < 0:
+				$Sprite.play("Jump")
+			else:
+				$Sprite.play("Fall")
+			if friction == true:
+				motion.x = lerp(motion.x, 0, 0.05)
+		motion = move_and_slide(motion, UP)
+		
+		if get_slide_count() > 0:
+			for i in range(get_slide_count()):
+				if "enemy" in get_slide_collision(i).collider.name:
+					dead()
+					
+func dead():
+	is_dead = true
+	_velocity = Vector2(0,0)
+	$Sprite.play("dead")
+	$CollisionShape2D.disabled = true
+	$Timer.start()
+		
+func _on_Timer_timeout():
+	get_tree().change_scene("res://Titlescreen/Titlescreen.tscn")
+	
+func calculate_stomp_velocity(linear_velocity: Vector2, impulse: float) -> Vector2:
+	var out: = linear_velocity
+	out.y = -impulse
+	return out
+
+
